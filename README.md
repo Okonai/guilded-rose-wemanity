@@ -1,4 +1,10 @@
-# Gilded Rose Refactoring Kata
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Setup](#setup)
+
+# General info
+## Gilded Rose Refactoring Kata
 
 This Kata was originally created by Terry Hughes (http://twitter.com/TerryHughes). It is already on GitHub [here](https://github.com/NotMyself/GildedRose). See also [Bobby Johnson's description of the kata](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/).
 
@@ -56,3 +62,16 @@ If your programming language doesn't have an easy way to add a command-line inte
 I analysed this repo according to the clean code standards on [Better Code Hub](https://bettercodehub.com) just to get an independent opinion of how bad the code is. Perhaps unsurprisingly, the compliance score is low!
 
 [![BCH compliance](https://bettercodehub.com/edge/badge/emilybache/GildedRose-Refactoring-Kata?branch=master)](https://bettercodehub.com/) 
+# Technologies
+Project is created with:
+* node version: 16.17.1
+* chai version: ^4.2.0,
+* mocha versin: ^10.1.0
+	
+# Setup
+To run this project, install it locally using npm:
+
+```
+$ npm install
+$ npm test
+```
