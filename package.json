@@ -4,8 +4,8 @@
   "description": "Gilded Rose kata in Javascript with Mocha",
   "scripts": {
     "test": "mocha",
-    "test:watch": "mocha --watch"
-
+    "test:watch": "mocha --watch",
+    "generate:fixtures": "node ./test/fixtures/generator.js "
   },
   "repository": {
     "type": "git",
