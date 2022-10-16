@@ -46,7 +46,7 @@ const outputFilename = "test/fixtures/characterized_test_data.json";
 fs.writeFileSync(outputFilename, JSON.stringify(tests, null, 2));
 
 // We give feedback to the user how many test cases we have generated.
-console.log(`Generated ${tests.length} test cases.`);
+console.log(`Generated ${tests.length} test cases. into ${outputFilename}`);
 
 module.exports = {
   tests,
