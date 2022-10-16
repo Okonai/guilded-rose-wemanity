@@ -10,6 +10,7 @@ const ItemTypes = {
   BIRE: "Aged Brie",
   HAND: "Sulfuras, Hand of Ragnaros",
   PASS: "Backstage passes to a TAFKAL80ETC concert",
+  NORMAL: "+5 Dexterity Vest",
 };
 
 function updateBrie(item) {
@@ -81,5 +82,5 @@ class Shop {
 }
 module.exports = {
   Item,
-  Shop,
+  Shop
 };
