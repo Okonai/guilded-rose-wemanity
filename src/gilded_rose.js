@@ -70,8 +70,6 @@ function updateConjured(item) {
   } else if (item.quality > 50) {
     item.quality = 50;
   }
-
-  console.log(item);
 }
 
 class Shop {
