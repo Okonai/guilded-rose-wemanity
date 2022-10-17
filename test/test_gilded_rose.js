@@ -7,10 +7,10 @@ const ItemNames = {
   HAND: "Sulfuras, Hand of Ragnaros",
   PASS: "Backstage passes to a TAFKAL80ETC concert",
   NORMAL: "+5 Dexterity Vest",
+  CONJURED: "Conjured Mana Cake",
 };
 
 describe("Gilded Rose", function () {
-
   describe("updateQuality", function () {
     describe(ItemNames.NORMAL, function () {
       it("should decrease quality by 1 AND sellIn by 1", function () {
@@ -147,6 +147,40 @@ describe("Gilded Rose", function () {
         expect(items[0].sellIn).to.equal(10);
         expect(items[0].quality).to.equal(0);
       });
+    });
+  });
+
+  describe("Conjured Items", function () {
+    it("should decrease in quality twice as fast as normal items", function () {
+      const gildedRose = new Shop([new Item(ItemNames.CONJURED, 2, 50)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].name).to.equal(ItemNames.CONJURED);
+      expect(items[0].sellIn).to.equal(1);
+      expect(items[0].quality).to.equal(48);
+    });
+
+    it("should decrease in quality twice as fast as normal items after the sell by date has passed", function () {
+      const gildedRose = new Shop([new Item(ItemNames.CONJURED, 0, 50)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].name).to.equal(ItemNames.CONJURED);
+      expect(items[0].sellIn).to.equal(-1);
+      expect(items[0].quality).to.equal(46);
+    });
+
+    it("should never have a quality of less than 0", function () {
+      const gildedRose = new Shop([new Item(ItemNames.CONJURED, 2, 0)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].name).to.equal(ItemNames.CONJURED);
+      expect(items[0].sellIn).to.equal(1);
+      expect(items[0].quality).to.equal(0);
+    });
+
+    it("should never have a quality of more than 50", function () {
+      const gildedRose = new Shop([new Item(ItemNames.CONJURED, 2, 80)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].name).to.equal(ItemNames.CONJURED);
+      expect(items[0].sellIn).to.equal(1);
+      expect(items[0].quality).to.equal(50);
     });
   });
 });
