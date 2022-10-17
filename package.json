@@ -4,6 +4,7 @@
   "description": "Gilded Rose kata in Javascript with Mocha",
   "scripts": {
     "test": "mocha",
+    "test:coverage": "nyc mocha",
     "test:watch": "mocha --watch",
     "generate:fixtures": "node ./test/fixtures/generator.js "
   },
@@ -24,6 +25,7 @@
   "homepage": "https://github.com/emilybache/GildedRose-Refactoring-Kata",
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^10.1.0"
+    "mocha": "^10.1.0",
+    "nyc": "^15.1.0"
   }
 }

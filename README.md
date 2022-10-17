@@ -74,4 +74,22 @@ To run this project, install it locally using npm:
 ```
 $ npm install
 $ npm test
+$ npm test:coverage
 ```
+
+## My process for the refactoring
+
+- I generated test  data for  a characteruzation test. I used the min max values from the  source  code. 
+- Once I had those test  running I started with  simplification. I removed complexity from the shop method called update  quality. I extracted the  logic for the  different  items into  separate  methods.
+- After I  was finished with the  simplification I started with  the  duplication. I  extracted the  logic for the  different  items into  separate  classes. I  used the  strategy pattern to  achieve this.
+- When I was happy with my refactoring I  wrote tests that covered the  business l logic. This way I reduced tthe risk of  breaking the  code when I  added new features.
+- I wrote the tests  for the new feature
+- I  implemented the  new feature
+
+## What I would do next
+
+- I would  add  a  new  feature  that  would  allow  the  user  to  add  new  items  to  the  shop. I would  use  the  strategy pattern to  achieve this.
+-  I would create a shopp where we pass a day instead of calling the update quality method. This way we would  be able to  add  new  features  without  clutering the  shop u[date quality method.
+-  I would add more tests to cover the  edge cases.
+-  I  would try and write BDD tests to test complpex business  logic not just on one unit but the whole shop and the  items.
+
