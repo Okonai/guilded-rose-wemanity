@@ -11,6 +11,7 @@ const ItemTypes = {
   HAND: "Sulfuras, Hand of Ragnaros",
   PASS: "Backstage passes to a TAFKAL80ETC concert",
   NORMAL: "+5 Dexterity Vest",
+  CONJURED: "Conjured Mana Cake",
 };
 
 function updateBrie(item) {
@@ -55,6 +56,24 @@ function updateNormal(item) {
       }
 }
 
+function updateConjured(item) {
+  if (item.quality > 0) {
+    item.quality = item.quality - 2;
+  }
+  item.sellIn = item.sellIn - 1;
+  if (item.sellIn < 0 && item.quality > 0) {
+    item.quality = item.quality - 2;
+  }
+
+  if (item.quality < 0) {
+    item.quality = 0;
+  } else if (item.quality > 50) {
+    item.quality = 50;
+  }
+
+  console.log(item);
+}
+
 class Shop {
   constructor(items = []) {
     this.items = items;
@@ -70,6 +89,9 @@ class Shop {
           continue;
         case ItemTypes.PASS:
           updatePass(item);
+          continue;
+        case ItemTypes.CONJURED:
+          updateConjured(item);
           continue;
         default:
           updateNormal(item);
