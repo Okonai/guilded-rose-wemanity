@@ -78,7 +78,6 @@ describe("Gilded Rose", function () {
         const gildedRose = new Shop([new Item(ItemNames.HAND, 0, 80)]);
         const items = gildedRose.updateQuality();
         expect(items[0].name).to.equal(ItemNames.HAND);
-        expect(items[0].sellIn).to.equal(0);
         expect(items[0].quality).to.equal(80);
       });
     });

@@ -14,62 +14,43 @@ const ItemTypes = {
   CONJURED: "Conjured Mana Cake",
 };
 
-function updateBrie(item) {
-  if (item.quality < 50) {
-    item.quality = item.quality + 1;
-  }
-  item.sellIn = item.sellIn - 1;
-
-  if (item.sellIn < 0 && item.quality < 50) {
-    item.quality = item.quality + 1;
-  }
-}
-
-function updatePass(item) {
-  if (item.quality < 50) {
-    item.quality = item.quality + 1;
-    if (item.sellIn < 11 && item.quality < 50) {
-      item.quality = item.quality + 1;
-    }
-    if (item.sellIn < 6 && item.quality < 50) {
-      item.quality = item.quality + 1;
-    }
-  }
-
-  item.sellIn = item.sellIn - 1;
-
-  if (item.sellIn < 0 ) {
-    item.quality = item.quality - item.quality;
-  }
-}
-
-function updateHand(item) {
+function limitNumberWithinRange(num, min = 0, max = 50) {
+  const parsed = parseInt(num)
+  return Math.min(Math.max(parsed, min), max)
 }
 
 function updateNormal(item) {
-  if (item.quality > 0) {
-    item.quality = item.quality - 1;
-  }
-  item.sellIn = item.sellIn - 1;
-  if (item.sellIn < 0 && item.quality > 0) {
-        item.quality = item.quality - 1;
-      }
+  const qualityChange = item.sellIn < 0 ? 2 : 1;
+  item.quality = limitNumberWithinRange((item.quality - qualityChange), 0, 50);
 }
 
-function updateConjured(item) {
-  if (item.quality > 0) {
-    item.quality = item.quality - 2;
-  }
-  item.sellIn = item.sellIn - 1;
-  if (item.sellIn < 0 && item.quality > 0) {
-    item.quality = item.quality - 2;
-  }
+function updateBrie(item) {
+  const qualityChange = item.sellIn < 0 ? 2 : 1;
+  item.quality = limitNumberWithinRange((item.quality + qualityChange), 0, 50);
+}
 
-  if (item.quality < 0) {
-    item.quality = 0;
-  } else if (item.quality > 50) {
-    item.quality = 50;
-  }
+function updatePass(item) {
+  switch (true) {
+    case item.sellIn < 0:
+      item.quality = 0;
+      break;
+    case item.sellIn < 5:
+      item.quality = item.quality + 3
+      break;
+    case item.sellIn < 10:
+      item.quality = item.quality + 2
+      break;
+    default:
+      item.quality = item.quality + 1
+    }
+    item.quality = limitNumberWithinRange(item.quality, 0, 50);
+}
+
+function updateHand(item) {}
+
+function updateConjured(item) {
+  const qualityChange = item.sellIn < 0 ? 4 : 2;
+  item.quality = limitNumberWithinRange((item.quality - qualityChange), 0, 50);
 }
 
 class Shop {
@@ -78,6 +59,7 @@ class Shop {
   }
   updateQuality() {
     for (const item of this.items) {
+      item.sellIn = item.sellIn - 1;
       switch (item.name) {
         case ItemTypes.BIRE:
           updateBrie(item);
@@ -102,5 +84,5 @@ class Shop {
 }
 module.exports = {
   Item,
-  Shop
+  Shop,
 };
