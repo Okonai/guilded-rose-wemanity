@@ -3,7 +3,7 @@
 * [Technologies](#technologies)
 * [Setup](#setup)
 
-# General info
+  <!-- # General info -->
 ## Gilded Rose Refactoring Kata
 
 This Kata was originally created by Terry Hughes (http://twitter.com/TerryHughes). It is already on GitHub [here](https://github.com/NotMyself/GildedRose). See also [Bobby Johnson's description of the kata](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/).
@@ -77,7 +77,7 @@ $ npm test
 $ npm test:coverage
 ```
 
-## My process for the refactoring
+# My process for the refactoring
 
 - I generated test  data for  a characteruzation test. I used the min max values from the  source  code. 
 - Once I had those test  running I started with  simplification. I removed complexity from the shop method called update  quality. I extracted the  logic for the  different  items into  separate  methods.
@@ -87,6 +87,7 @@ $ npm test:coverage
 - I  implemented the  new feature
 
 ## What I would do next
+![BCH compliance](https://bettercodehub.com/edge/badge/Okonai/guilded-rose-wemanity?branch=main)
 
 - I would  add  a  new  feature  that  would  allow  the  user  to  add  new  items  to  the  shop. I would  use  the  strategy pattern to  achieve this.
 -  I would create a shopp where we pass a day instead of calling the update quality method. This way we would  be able to  add  new  features  without  clutering the  shop u[date quality method.
