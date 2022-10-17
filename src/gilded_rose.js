@@ -19,62 +19,66 @@ function limitNumberWithinRange(num, min = 0, max = 50) {
   return Math.min(Math.max(parsed, min), max)
 }
 
-function updateNormal(item) {
-  const qualityChange = item.sellIn < 0 ? 2 : 1;
-  item.quality = limitNumberWithinRange((item.quality - qualityChange), 0, 50);
+function updateNormal(sellIn, quality) {
+  const qualityChange = sellIn < 0 ? 2 : 1;
+  return limitNumberWithinRange((quality - qualityChange), 0, 50);
 }
 
-function updateBrie(item) {
-  const qualityChange = item.sellIn < 0 ? 2 : 1;
-  item.quality = limitNumberWithinRange((item.quality + qualityChange), 0, 50);
+function updateBrie(sellIn, quality) {
+  const qualityChange = sellIn < 0 ? 2 : 1;
+  return limitNumberWithinRange((quality + qualityChange), 0, 50);
 }
 
-function updatePass(item) {
+function updatePass(sellIn, quality) {
   switch (true) {
-    case item.sellIn < 0:
-      item.quality = 0;
+    case sellIn < 0:
+      quality = 0;
       break;
-    case item.sellIn < 5:
-      item.quality = item.quality + 3
+    case sellIn < 5:
+      quality = quality + 3
       break;
-    case item.sellIn < 10:
-      item.quality = item.quality + 2
+    case sellIn < 10:
+      quality = quality + 2
       break;
     default:
-      item.quality = item.quality + 1
+      quality = quality + 1
     }
-    item.quality = limitNumberWithinRange(item.quality, 0, 50);
+    return limitNumberWithinRange(quality, 0, 50);
 }
 
-function updateHand(item) {}
+function updateHand(sellIn, quality) {
+  return quality;
+}
 
-function updateConjured(item) {
-  const qualityChange = item.sellIn < 0 ? 4 : 2;
-  item.quality = limitNumberWithinRange((item.quality - qualityChange), 0, 50);
+function updateConjured(sellIn, quality) {
+  const qualityChange = sellIn < 0 ? 4 : 2;
+  return limitNumberWithinRange((quality - qualityChange), 0, 50);
 }
 
 class Shop {
   constructor(items = []) {
     this.items = items;
   }
+
   updateQuality() {
-    for (const item of this.items) {
+    for (let item of this.items) {
       item.sellIn = item.sellIn - 1;
+      const { sellIn, quality } = item;
       switch (item.name) {
         case ItemTypes.BIRE:
-          updateBrie(item);
+          item.quality = updateBrie(sellIn, quality);
           continue;
         case ItemTypes.HAND:
-          updateHand(item);
+          item.quality = updateHand(sellIn, quality);
           continue;
         case ItemTypes.PASS:
-          updatePass(item);
+          item.quality = updatePass(sellIn, quality);
           continue;
         case ItemTypes.CONJURED:
-          updateConjured(item);
+          item.quality = updateConjured(sellIn, quality);
           continue;
         default:
-          updateNormal(item);
+          item.quality = updateNormal(sellIn, quality);
           continue;
       }
     }
